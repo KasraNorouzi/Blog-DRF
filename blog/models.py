@@ -1,6 +1,8 @@
 from datetime import timezone
-from accounts.models import User
+from django.contrib.auth import get_user_model
 from django.db import models
+
+User = get_user_model()
 
 
 # Create your models here.
@@ -21,7 +23,7 @@ class Post(models.Model):
     content = models.TextField()
     status = models.BooleanField(default=False)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    created_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     published_date = models.DateTimeField(blank=True, null=True)
 
